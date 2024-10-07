@@ -1,18 +1,188 @@
-body{
-    background-color: rgb(248, 246, 246);
-}
-/* #cv-form{
-    display: none;
-} */
-#cv-template{
-    display: none;
-
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.myimg{
-    border-radius: 50%;
-    width: 150px;
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 20px;
+    line-height: 1.6;
 }
-.background{
-    background-color: aquamarine;
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    color: #343a40;
+    font-weight: bold;
+}
+
+/* Form Section */
+.form-section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #495057;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+/* Labels */
+label {
+    font-size: 1.1rem;
+    color: #495057;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Input Fields */
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"], textarea {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    background-color: #f1f3f5;
+    transition: background-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="number"]:focus, textarea:focus {
+    background-color: #fff;
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Buttons */
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+#addEducationBtn, #addExperienceBtn, #addSkillBtn {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Resume Preview */
+.resume-section {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.resume-section h2 {
+    margin-bottom: 20px;
+    color: #495057;
+}
+
+.resume-item {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.resume-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.resume-item h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+.resume-item p {
+    font-size: 1.1rem;
+    color: #495057;
+}
+
+/* Education, Experience, and Skills Entries */
+.education-entry, .experience-entry, .skill-entry {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.education-entry input, .experience-entry input, .skill-entry input {
+    margin-bottom: 10px;
+}
+
+/* Input Error Handling */
+input:invalid {
+    border-color: #e3342f;
+    background-color: #ffefef;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .resume-section {
+        padding: 20px;
+    }
+
+    .resume-item h3 {
+        font-size: 1.4rem;
+    }
+
+    .resume-item p {
+        font-size: 1rem;
+    }
 }
