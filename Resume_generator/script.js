@@ -1,103 +1,111 @@
-// alert("loading");
-function  addNewWEField(){
-    // console.log("adding new field");
-    
-    let newNode=document.createElement("textarea");
-    newNode.classList.add("form-control");
-    newNode.classList.add("weField");
-    newNode.classList.add("mt-2")
-    newNode.setAttribute("rows",3);
-    newNode.setAttribute("placeholder","Enter here");
+// Handle form submission and resume generation
+document.getElementById('resumeForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
 
-    let weOb=document.getElementById("we")
-    let weaddButtonOb=document.getElementById("weAddButton");
+    // Get personal info and summary
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const summary = document.getElementById('summary').value;
+    const skills = document.getElementById('skills').value;
 
-    weOb.insertBefore(newNode,weaddButtonOb);
-}
+    // Get all education entries
+    const educationEntries = document.querySelectorAll('.education-entry');
+    let educationHTML = '';
+    educationEntries.forEach(entry => {
+        const degree = entry.querySelector('.degree').value;
+        const institution = entry.querySelector('.institution').value;
+        const graduationYear = entry.querySelector('.graduationYear').value;
+        educationHTML += `
+            <div class="resume-item">
+                <p>${degree}, ${institution}, ${graduationYear}</p>
+            </div>
+        `;
+    });
 
-function addNewAQField(){
-    let newNode=document.createElement("textarea");
-    newNode.classList.add("form-control");
-    newNode.classList.add("eqField");
-    newNode.classList.add("mt-2")
-    newNode.setAttribute("rows",3);
-    newNode.setAttribute("placeholder","Enter here");
+    // Get all experience entries
+    const experienceEntries = document.querySelectorAll('.experience-entry');
+    let experienceHTML = '';
+    experienceEntries.forEach(entry => {
+        const position = entry.querySelector('.position').value;
+        const company = entry.querySelector('.company').value;
+        const experienceYears = entry.querySelector('.experienceYears').value;
+        experienceHTML += `
+            <div class="resume-item">
+                <p>${position} at ${company}, ${experienceYears} years</p>
+            </div>
+        `;
+    });
 
-    let aqOb=document.getElementById("aq")
-    let aqaddButtonOb=document.getElementById("aqAddButton");
+    // Display resume preview
+    const resumePreview = document.getElementById('resumePreview');
+    resumePreview.innerHTML = `
+        <div class="resume-item">
+            <h3>${name}</h3>
+            <p>Email: ${email}</p>
+            <p>Phone: ${phone}</p>
+            <p><strong>Summary:</strong> ${summary}</p>
+        </div>
+        <div class="resume-item">
+            <h3>Education</h3>
+            ${educationHTML}
+        </div>
+        <div class="resume-item">
+            <h3>Work Experience</h3>
+            ${experienceHTML}
+        </div>
+        <div class="resume-item">
+            <h3>Skills</h3>
+            <p>${skills}</p>
+        </div>
+    `;
+});
 
-    aqOb.insertBefore(newNode,aqaddButtonOb);
+// Add more education fields
+document.getElementById('addEducationBtn').addEventListener('click', function() {
+    const educationSection = document.getElementById('educationSection');
+    const newEducationEntry = document.createElement('div');
+    newEducationEntry.classList.add('education-entry');
+    newEducationEntry.innerHTML = `
+        <label for="degree">Degree:</label>
+        <input type="text" class="degree" required>
 
-}
+        <label for="institution">Institution:</label>
+        <input type="text" class="institution" required>
 
-// Generiting CV
-function generateCV(){
-    // console.log("generate CV")
-    let nameField=document.getElementById("nameField").value;
+        <label for="graduationYear">Graduation Year:</label>
+        <input type="number" class="graduationYear" required>
+    `;
+    educationSection.appendChild(newEducationEntry);
+});
 
-    let nameT1=document.getElementById("nameT1")
+// Add more experience fields
+document.getElementById('addExperienceBtn').addEventListener('click', function() {
+    const experienceSection = document.getElementById('experienceSection');
+    const newExperienceEntry = document.createElement('div');
+    newExperienceEntry.classList.add('experience-entry');
+    newExperienceEntry.innerHTML = `
+        <label for="position">Position:</label>
+        <input type="text" class="position" required>
 
-    nameT1.innerHTML = nameField;
+        <label for="company">Company:</label>
+        <input type="text" class="company" required>
 
-    let nameT2=document.getElementById("nameT2");
-    nameT2.innerHTML = nameField;
+        <label for="experienceYears">Years of Experience:</label>
+        <input type="number" class="experienceYears" required>
+    `;
+    experienceSection.appendChild(newExperienceEntry);
+});
 
-    // // Contact
-    document.getElementById("ContactT").innerHTML = document.getElementById("contactField").value;
-
-    //address
-    document.getElementById("addressT").innerHTML = document.getElementById("addressField").value;
-
-    //facebook link
-    document.getElementById("fbT").innerHTML = document.getElementById("fbField").value;
-    document.getElementById("instaT").innerHTML = document.getElementById("instaField").value;
-    document.getElementById("linkT").innerHTML = document.getElementById("linkedinField").value;
-
-    //Objective
-    document.getElementById("objectiveT").innerHTML = document.getElementById("objectiveField").value;
-
-    //Work Experience
-    let wes =document.getElementsByClassName("weField");
-    let str = "";
-
-    for(let e of wes)
-    {
-        str = str + `<li> ${e.value} </li>`;
-        
-    }
-    document.getElementById("weT").innerHTML = str;
-
-    // acedemic qualification
-    let aqs = document.getElementsByClassName("eqField");
-    let str1 =" ";
-
-    for (let e of aqs){
-        str1 += `<li> ${e.value} </li>`;
-    }
-    document.getElementById("aqT").innerHTML = str1;
-
-    document.getElementById("cv-form").style.display="none";
-    document.getElementById("cv-template").style.display="block";
-
-    // img
-    let file = document.getElementById("imgField").files[0];
-console.log(file);
-
-let reader = new FileReader();
-reader.readAsDataURL(file);
-console.log(reader.result);
-
-// set the image to template
-
-reader.onloadend = function(){
-    document.getElementById("imgTemplate").src = reader.result;
-};
-
-    document.getElementById("imgTemplate").src = reader.result;
-
-}
-// print cv
-function printCV()
-{
-    window.print();
-}
+// Download the resume as a PDF
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    const resumePreview = document.getElementById('resumePreview');
+    var opt = {
+        margin:       1,
+        filename:     'resume.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().from(resumePreview).set(opt).save();
+});
